@@ -78,6 +78,8 @@ pub async fn convert_store(in_store_path: PathBuf, out_store_path: PathBuf, conv
         }
     }
 
+    // TODO write storage version
+
     Ok(())
 }
 

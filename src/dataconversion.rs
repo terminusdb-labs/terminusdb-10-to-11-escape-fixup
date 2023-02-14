@@ -32,7 +32,7 @@ pub fn prolog_string_to_string(s: &str) -> Cow<str> {
                 escaping = true;
                 if result.is_none() {
                     let mut r = String::with_capacity(s.len());
-                    r.push_str(&s[1..ix]);
+                    r.push_str(&s[..ix]);
                     result = Some(r);
                 }
             } else if let Some(result) = result.as_mut() {
