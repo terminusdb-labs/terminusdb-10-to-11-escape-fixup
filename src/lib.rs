@@ -152,16 +152,20 @@ async fn convert_value_dict(in_store: &ArchiveLayerStore, out_store: &ArchiveLay
                 let s: String = entry.as_val::<LangString, String>();
                 let pos = s.find('@').expect("no @ found in langstring");
 
-                let lang_slice = &s[..pos];
-                let string_slice = &s[pos+1..];
-                let string_converted = prolog_string_to_string(string_slice);
+                let mut lang = &s[..pos];
+                if &lang[0..1] == "\'" || &lang[0..1] == "\"" {
+                    lang = &lang[1..lang.len()-1];
+                }
+
+                let val = &s[pos+2..s.len()-1];
+                let string_converted = prolog_string_to_string(val);
 
                 let mut converted = String::with_capacity(s.len());
-                converted.push_str(lang_slice);
+                converted.push_str(lang);
                 converted.push('@');
                 converted.push_str(&string_converted);
 
-                next_entry = String::make_entry(&converted);
+                next_entry = LangString::make_entry(&converted);
             },
             _ => {
                 next_entry = entry;
