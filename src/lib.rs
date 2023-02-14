@@ -174,9 +174,8 @@ async fn convert_value_dict(in_store: &ArchiveLayerStore, out_store: &ArchiveLay
                 Ordering::Greater => reorder = true,
                 _ => {}
             }
-
-            new_entries.push(next_entry);
         }
+        new_entries.push(next_entry);
     }
 
     if reorder {
