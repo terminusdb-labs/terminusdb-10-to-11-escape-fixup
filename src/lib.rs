@@ -1,12 +1,12 @@
+mod reachable;
+mod conversion_consts;
+mod convert_triples;
+mod convert_layer;
+pub mod convert_store;
+mod convert_dictionary;
 mod dataconversion;
-use chrono::{DateTime, Local};
-use dataconversion::*;
 
-use std::{io, cmp::Ordering, path::PathBuf, time::SystemTime};
-
-use bytes::BytesMut;
-use terminus_store::{storage::{PersistentLayerStore, archive::ArchiveLayerStore, consts::{self, LayerFileEnum, FILENAME_ENUM_MAP}, FileLoad, string_to_name}, structure::{TypedDict, Datatype, TypedDictBufBuilder, TdbDataType, LangString, TypedDictEntry}};
-
+/*
 pub async fn convert_store(in_store_path: PathBuf, out_store_path: PathBuf, conversion_datetime: DateTime<Local>) -> io::Result<()> {
     let in_store = ArchiveLayerStore::new(&in_store_path);
     let out_store = ArchiveLayerStore::new(&out_store_path);
@@ -175,7 +175,9 @@ async fn convert_value_dict(in_store: &ArchiveLayerStore, out_store: &ArchiveLay
         if let Some(last) = new_entries.last() {
             match last.cmp(&next_entry) {
                 Ordering::Equal => panic!("after normalizing prolog strings, two entries were equal"),
-                Ordering::Greater => reorder = true,
+                Ordering::Greater => {
+                    panic!("encountered elements in the wrong order");
+                    reorder = true},
                 _ => {}
             }
         }
@@ -264,3 +266,4 @@ async fn copy_unchanged_files(in_store: &ArchiveLayerStore, out_store: &ArchiveL
 
     Ok(())
 }
+*/
